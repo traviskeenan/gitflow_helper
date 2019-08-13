@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.1.7.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.keenan.famil</groupId>
 	<artifactId>gitflow_helper</artifactId>
@@ -37,6 +36,33 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<plugin>
+				<groupId>com.e-gineering</groupId>
+				<artifactId>gitflow-helper-maven-plugin</artifactId>
+				<version>1.2.2</version>
+				<configuration>
+					<!-- <releaseDeploymentRepository>http://localhost:8081/artifactory/libs-release${release.repository}</releaseDeploymentRepository> -->
+					<releaseDeploymentRepository>http://localhost:8081/artifactory/libs-release</releaseDeploymentRepository>
+					<!-- <stageDeploymentRepository>${stage.repository}</stageDeploymentRepository> -->
+					<stageDeploymentRepository>http://localhost:8081/artifactory/libs-stage</stageDeploymentRepository>
+					<!-- <snapshotDeploymentRepository>${snapshot.repository}</snapshotDeploymentRepository> -->
+					<snapshotDeploymentRepository>http://localhost:8081/artifactory/libs-snapshot</snapshotDeploymentRepository>
+					<tag>${project.artifactId}-${project.version}</tag>
+				</configuration>
+				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<goals>
+							<goal>enforce-versions</goal>
+							<goal>retarget-deploy</goal>
+							<goal>tag-master</goal>
+							<goal>promote-master</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
 
